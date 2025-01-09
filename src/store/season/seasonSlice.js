@@ -4,7 +4,7 @@ export const seasonSlice = createSlice({
     name: 'season',
     initialState: {
         seasons: [],
-        acive: {},
+        active: {},
         isLoading: false
     },
     reducers: {
@@ -18,12 +18,16 @@ export const seasonSlice = createSlice({
                 }
             });
 
+            state.active = payload[0];
             state.seasons = payload;
             state.isLoading = false;
+        },
+        setActive: (state, {payload}) => {
+            state.active = payload
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { getSeason, loading } = seasonSlice.actions;
+export const { getSeason, loading, setActive } = seasonSlice.actions;

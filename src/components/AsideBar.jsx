@@ -1,5 +1,6 @@
 import { useEffect} from 'react'
 import { useSeasonStore } from '../hooks'
+import { SeasonItem } from '../season/components/SeasonItem';
 
 export const AsideBar = () => {
 
@@ -21,10 +22,7 @@ export const AsideBar = () => {
               <h2 className='text-2xl font-bold mb-4'>F1 Temporadas</h2>
               <ul className='space-y-2'>
                 {seasons.map((season) => (
-                  <li key={season}
-                  className='hover:bg-gray-700 px-3 py-2 rounded cursor-pointer'>
-                    {season}
-                  </li>
+                  <SeasonItem season={season} key={season} />
                 ))}
                 </ ul>
             </>

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import f1Api from "../api/f1Api";
-import { getSeason, loading } from "../store/season/seasonSlice";
+import { getSeason, loading, setActive } from "../store/season/seasonSlice";
 
 export const useSeasonStore = () => {
 
@@ -15,6 +15,10 @@ export const useSeasonStore = () => {
         dispatch(getSeason(data.response))
     };
 
+    const startSetActive = async(id) => {
+        dispatch(setActive( id ))
+    }
+
     return {
         //*Propiedades
         active,
@@ -22,7 +26,8 @@ export const useSeasonStore = () => {
         seasons,
 
         //*Metodos
-        startGetSeasons
+        startGetSeasons,
+        startSetActive
     }
 
 }
