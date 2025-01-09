@@ -10,10 +10,20 @@ export const seasonSlice = createSlice({
     reducers: {
         loading: (state) => {
             state.isLoading = true
+        },
+        getSeason: (state, {payload}) => {
+            payload.sort((a, b) => {
+                if( a> b){
+                    return -1;
+                }
+            });
+
+            state.seasons = payload;
+            state.isLoading = false;
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { loading } = seasonSlice.actions;
+export const { getSeason, loading } = seasonSlice.actions;
