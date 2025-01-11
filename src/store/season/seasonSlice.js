@@ -4,7 +4,7 @@ export const seasonSlice = createSlice({
     name: 'season',
     initialState: {
         seasons: [],
-        active: {},
+        active: '',
         isLoading: false
     },
     reducers: {

@@ -11,7 +11,7 @@ export const AsideBar = () => {
   }, [])
 
   return (
-    <aside className='w-64 h-screen bg-gray-800 text-white fixed top-0 left-0 overflow-y-auto p-4'>
+    <aside className='w-64 w h-screen bg-gray-800 text-white top-0 left-0 overflow-y-auto p-4'>
         {
           isLoading
           ?

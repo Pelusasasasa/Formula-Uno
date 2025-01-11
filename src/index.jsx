@@ -6,13 +6,16 @@ import { store } from './store/store';
 
 import './index.css';
 import { FormulaUnoApp } from './FormulaUnoApp';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <FormulaUnoApp />
+      <BrowserRouter>
+        <FormulaUnoApp />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
