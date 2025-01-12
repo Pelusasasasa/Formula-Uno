@@ -5975,7 +5975,7 @@ export const Season = () => {
           {
             races.map((elem, index) => (
                 elem.type === 'Race' && 
-                <div onClick={activarRace} key={index} id={elem.id} className="bg-blue-500 text-white p-4 rounded shadow cursor-pointer hover:bg-blue-600">
+                <div onClick={activarRace} key={index} id={elem.id} className={`${active?.id === elem.id ? 'bg-blue-800' : 'bg-blue-500'} text-white p-4 rounded shadow cursor-pointer hover:bg-blue-600`}>
                   <p className="text-center font-bold">{cont++}</p>
                 </div>
             ))

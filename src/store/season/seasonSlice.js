@@ -12,14 +12,11 @@ export const seasonSlice = createSlice({
             state.isLoading = true
         },
         getSeason: (state, {payload}) => {
-            payload.sort((a, b) => {
-                if( a> b){
-                    return -1;
-                }
-            });
+            let aux = [...payload];
+            aux = aux.reverse();
 
-            state.active = payload[0];
-            state.seasons = payload;
+            state.active = aux[0];
+            state.seasons = aux;
             state.isLoading = false;
         },
         setActive: (state, {payload}) => {
