@@ -3,6 +3,11 @@ import { useRacesStore, useSeasonStore } from "../../hooks";
 import f1Api from "../../api/f1Api";
 import { TableAnual } from "../../season/pages/TableAnual";
 import { TableRace } from "../components/TableRace";
+import { TableAnualTeam } from "../../team/components/TableAnualTeam";
+import { TableQ1 } from "../components/TableQ1";
+import { TableQ2 } from "../components/TableQ2";
+import { TableQ3 } from "../components/TableQ3";
+import { Table1Practice } from "../components/Table1Practice";
 
 const initialStatedrive = {
     name: '',
@@ -34,17 +39,28 @@ export const Race = () => {
         </div>
 
         {/* Botones de Alternancia */}
-        <div className="flex justify-center space-x-4 mb-6">
-            <button onClick={() => setActiveTable('race')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'race' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla de la carrera</button>
-            <button onClick={() => setActiveTable('anual')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'anual' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla Anual</button>
+        <div className="flex flex-col justify-center items-center gap-2 space-x-4 mb-6">
+            <div className="flex space-x-4 mb-6">
+                <button onClick={() => setActiveTable('anual')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'anual' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla Anual</button>
+                <button onClick={() => setActiveTable('constructor')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'constructor' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla De Constructores</button>
+            </div>
+            <div className="flex space-x-4 mb-6">
+                <button onClick={() => setActiveTable('Q1')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q1' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>1 Clasificacion (Q1)</button>
+                <button onClick={() => setActiveTable('Q2')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q2' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>2 Clasificacion (Q2)</button>
+                <button onClick={() => setActiveTable('Q3')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q3' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>3 Clasificacion (Q3)</button>
+                <button onClick={() => setActiveTable('race')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'race' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla de la carrera</button>
+                <button onClick={() => setActiveTable('practice1')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'practice1' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>1 Practica</button>
+            </div>
         </div>
         {/* Si la tabla esta activa en race significa que son carreras y si es anual es la tabla anual */}
 
-        {
-            activeTable === 'race'
-            ? <TableRace id={id}/>
-            : <TableAnual season={active} />
-        }
+        { activeTable === 'Q1'&& <TableQ1 id={id}/> }
+        { activeTable === 'Q2'&& <TableQ2 id={id}/> }
+        { activeTable === 'Q3'&& <TableQ3 id={id}/> }
+        { activeTable === 'race'&& <TableRace id={id}/> }
+        { activeTable === 'anual' && <TableAnual season={active} /> }
+        { activeTable === 'constructor' && <TableAnualTeam />}
+        { activeTable === 'practice1' && <Table1Practice />}
         
 
         <div className="flex justify-around">

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { loading, setActive } from "../store/races/racesSlice";
+import { loading, setActive, setRaces } from "../store/races/racesSlice";
 import f1Api from "../api/f1Api";
 
 export const useRacesStore = () => {
@@ -8,11 +8,18 @@ export const useRacesStore = () => {
     const {isLoading, race, races} = useSelector(state => state.races);
 
     const startSetRace = async(id) => {
-        dispatch( loading() );
-        const { data } = await f1Api.get(`races?id=${id}`);        
+        if (id !== "") {
+            dispatch( loading() );
+            console.log(id)
+            const { data } = await f1Api.get(`races?id=${id}`);
 
-        dispatch( setActive(data.response[0]) );
-    }
+            dispatch( setActive(data.response[0]) );
+        };
+    };
+
+    const startSetRaces = async(lista) => {
+        dispatch( setRaces(lista));
+    };
 
     return {
         //*Propiedades
@@ -21,6 +28,7 @@ export const useRacesStore = () => {
         races,
 
         //*Metodos
-        startSetRace
+        startSetRace,
+        startSetRaces
     }
 };

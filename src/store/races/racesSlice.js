@@ -5,6 +5,10 @@ export const racesSlice = createSlice({
     initialState: {
         race: {},
         races: [],
+        sprintRace: [],
+        firstQ1: [],
+        firstQ2: [],
+        firstQ3: [],
         isLoading: false
     },
     reducers: {
@@ -12,13 +16,16 @@ export const racesSlice = createSlice({
             state.isLoading= true;
         },
         setActive: (state, {payload}) => {
-            console.log(payload)
+
             state.race = payload;
             state.isLoading = false;
+        },
+        setRaces: (state, {payload}) => {
+            state.races = payload;
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { loading, setActive } = racesSlice.actions;
+export const { loading, setActive, setRaces } = racesSlice.actions;

@@ -5948,7 +5948,7 @@ const races = [
 
 export const Season = () => {
   const {active} = useSeasonStore();
-  const {startSetRace} = useRacesStore();
+  const {race, startSetRace, startSetRaces} = useRacesStore();
 
   let cont = 1
 
@@ -5961,9 +5961,11 @@ export const Season = () => {
         id = e.target.id;
     };
 
-    startSetRace(id)
+    startSetRace(id);
 
-  }
+  };
+
+  startSetRaces(races)
 
   return (
     <div className='w-full flex-1 p-6'>
@@ -5975,7 +5977,7 @@ export const Season = () => {
           {
             races.map((elem, index) => (
                 elem.type === 'Race' && 
-                <div onClick={activarRace} key={index} id={elem.id} className={`${active?.id === elem.id ? 'bg-blue-800' : 'bg-blue-500'} text-white p-4 rounded shadow cursor-pointer hover:bg-blue-600`}>
+                <div onClick={activarRace} key={index} id={elem.id} className={`${race?.id === elem.id ? 'bg-blue-800' : 'bg-blue-500'} text-white p-4 rounded shadow cursor-pointer hover:bg-blue-600`}>
                   <p className="text-center font-bold">{cont++}</p>
                 </div>
             ))

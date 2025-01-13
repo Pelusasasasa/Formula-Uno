@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import f1Api from "../../api/f1Api";
 import { PositionAnualItem } from "../components/PositionAnualtem";
 
+import { rankingAnual } from "../../helpers/data";
+
 export const TableAnual = ({season}) => {
-    const [rankingAnual, setRankingAnual] = useState([]);
+    // const [rankingAnual, setRankingAnual] = useState([]);
 
-    const traerRanking = async() => {
-        const { data } = await f1Api.get(`rankings/drivers?season=${season}`);
-        setRankingAnual(data.response);
-        console.log(data.response)
-    };
+    // const traerRanking = async() => {
+    //     const { data } = await f1Api.get(`rankings/drivers?season=${season}`);
+    //     setRankingAnual(data.response);
+    //     console.log(data.response)
+    // };
 
-    useEffect(() => {
-        traerRanking();
-    }, []);
+    // useEffect(() => {
+    //     traerRanking();
+    // }, []);
     
     return (
         <div className="overflow-x-auto mb-6">
@@ -29,7 +31,7 @@ export const TableAnual = ({season}) => {
                 </thead>
                 <tbody>
                     {rankingAnual.map((elem) => (
-                        <PositionAnualItem {...elem}/>
+                        <PositionAnualItem key={elem.driver.id} {...elem}/>
                     ))}
                 </tbody>
             </table>
