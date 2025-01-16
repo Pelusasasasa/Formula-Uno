@@ -4,10 +4,7 @@ import f1Api from "../../api/f1Api";
 import { TableAnual } from "../../season/pages/TableAnual";
 import { TableRace } from "../components/TableRace";
 import { TableAnualTeam } from "../../team/components/TableAnualTeam";
-import { TableQ1 } from "../components/TableQ1";
-import { TableQ2 } from "../components/TableQ2";
-import { TableQ3 } from "../components/TableQ3";
-import { Table1Practice } from "../components/Table1Practice";
+import { TableQ1, TableQ2, TableQ3, TableSprint, Table1Practice } from "../components";
 
 const initialStatedrive = {
     name: '',
@@ -15,18 +12,26 @@ const initialStatedrive = {
 }
 
 export const Race = () => {
-    const {race, startSetRace} = useRacesStore();
+    const {race, races, startSetRace} = useRacesStore();
     const {active} = useSeasonStore();
     
     const {circuit, competition, date, fastest_lap, laps, status, id} = race;
 
     const [driver, setDriver] = useState(initialStatedrive);
     const [activeTable, setActiveTable] = useState('race');
+    const [sprint, setSprint] = useState(false);
 
     const traerConductor = async() => {
         const { data } = await f1Api.get(`drivers?id=${fastest_lap?.driver.id}`)
         setDriver(data.response[0]);
     };
+
+    useEffect(() => {
+        const aux = races.find(elem => (race.competition?.id === elem.competition?.id) && (elem.type === 'Sprint'));
+        if (aux) {
+            setSprint(true);
+        };
+    }, [race])
 
   return (
     race.id ?
@@ -48,6 +53,7 @@ export const Race = () => {
                 <button onClick={() => setActiveTable('Q1')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q1' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>1 Clasificacion (Q1)</button>
                 <button onClick={() => setActiveTable('Q2')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q2' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>2 Clasificacion (Q2)</button>
                 <button onClick={() => setActiveTable('Q3')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'Q3' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>3 Clasificacion (Q3)</button>
+                {sprint && <button onClick={() => setActiveTable('sprint')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'sprint' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Sprint</button>}
                 <button onClick={() => setActiveTable('race')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'race' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>Tabla de la carrera</button>
                 <button onClick={() => setActiveTable('practice1')} className={`px-4 py-2 rounded-lg font-bold ${activeTable === 'practice1' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>1 Practica</button>
             </div>
@@ -57,6 +63,7 @@ export const Race = () => {
         { activeTable === 'Q1'&& <TableQ1 id={id}/> }
         { activeTable === 'Q2'&& <TableQ2 id={id}/> }
         { activeTable === 'Q3'&& <TableQ3 id={id}/> }
+        { activeTable === 'sprint'&& <TableSprint id={id}/> }
         { activeTable === 'race'&& <TableRace id={id}/> }
         { activeTable === 'anual' && <TableAnual season={active} /> }
         { activeTable === 'constructor' && <TableAnualTeam />}

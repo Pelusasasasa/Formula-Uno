@@ -7,6 +7,7 @@ export const rankingsSlice = createSlice({
         Q1: [],
         Q2: [],
         Q3: [],
+        sprint: []
     },
     reducers: {
         setPractice1: (state, {payload}) =>{
@@ -21,9 +22,12 @@ export const rankingsSlice = createSlice({
         setQ3: (state,{ payload } ) => {
             state.Q3 = payload
         },
+        setSptrint: (state, { payload }) => {
+            state.sprint = payload;
+        }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { setPractice1, setQ1, setQ2, setQ3 } = rankingsSlice.actions;
+export const { setPractice1, setQ1, setQ2, setQ3, setSptrint } = rankingsSlice.actions;
