@@ -5,7 +5,7 @@ import { AppRouter } from './router/AppRouter'
 
 export const FormulaUnoApp = () => {
   return (
-    <div className='flex h-screen'>
+    <div className='flex h-[calc(100vh-50px)]'>
       <AsideBar/>
       <AppRouter/>
     </div>

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setPractice1, setQ1, setQ2, setQ3, setSptrint } from "../store/rankings/rankingSlice";
+import { setPractice1, setQ1, setQ2, setQ3, setRace, setSptrint } from "../store/rankings/rankingSlice";
 import f1Api from "../api/f1Api";
 
 export const useRankingsStore = () => {
     const dispatch = useDispatch();
-    const {practice1, Q1, Q2, Q3, sprint} = useSelector( state => state.rankings);
+    const {practice1, Q1, Q2, Q3, sprint, race} = useSelector( state => state.rankings);
 
     const setStartPractice1 = async(id) => {
         const {data} = await f1Api.get(`rankings/races?race=${id}`);
@@ -35,6 +35,11 @@ export const useRankingsStore = () => {
         dispatch( setSptrint(data.response) )
     };
 
+    const setStartRace = async(id) => {
+        const { data } = await f1Api.get(`rankings/races?race=${id}`);
+        dispatch( setRace(data.response) );
+    }
+
     //TODO Hacer LOS RESTANTES SET
 
     return {
@@ -44,6 +49,7 @@ export const useRankingsStore = () => {
         Q2,
         Q3,
         sprint,
+        race,
 
         //*Metodos
         setStartPractice1,
@@ -51,5 +57,6 @@ export const useRankingsStore = () => {
         setStartQ2,
         setStartQ3,
         setStartSrint,
+        setStartRace
     };;
 } 

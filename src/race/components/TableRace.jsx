@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { PositionItem } from "../../race/components/PositionItem"
-import f1Api from "../../api/f1Api";
-import { rankingRace } from "../../helpers/data";
+import { useRacesStore } from "../../hooks/useRacesStore";
+import { useRankingsStore } from "../../hooks/useRankingStore";
 
 
 export const TableRace = ({id}) => {
 
-    // const [rankingRace, setRankingRace] = useState([]);
+    const {race: fecha, races} = useRacesStore();
+    const {race, setStartRace } = useRankingsStore();
 
-    // const traerRanking = async() => {
-    //     const { data } = await f1Api.get(`rankings/races?race=${id}`);    
-    //     setRankingRace(data.response);
-    // };
+    const cargarRace = () => {
+        const carrera = races.find(elem => (elem.type === 'Race') && (elem.competition.id === fecha.competition.id));
+        setStartRace(carrera.id);
+    };
 
-    // useEffect(() => {
-    //     traerRanking();
-    // }, []);
+    useEffect(() => {
+        cargarRace();
+    }, [])
+
   return (
             
         <div className="overflow-x-auto mb-6">
@@ -30,7 +32,7 @@ export const TableRace = ({id}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rankingRace.map((elem) => (
+                    {race.map((elem) => (
                         <PositionItem key={elem.driver.id} {...elem}/>
                     ))}
                 </tbody>

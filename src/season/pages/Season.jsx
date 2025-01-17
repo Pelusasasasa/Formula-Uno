@@ -5968,7 +5968,7 @@ export const Season = () => {
   startSetRaces(races)
 
   return (
-    <div className='w-full flex-1 p-6'>
+    <div className='w-full flex-1 p-6 overflow-y-scroll h-screen'>
       
       <header className="mt-2">
         <h1 className="text-center text-2xl">Temporada {active}</h1>
