@@ -12,9 +12,11 @@ export const driverSlice = createSlice({
             state.isLoadingDriver = true
         },
         setDriver: (state, {payload}) => {
+            console.log(payload)
             state.driver = payload;
         },
         setStats: (state, {payload}) => {
+            console.log(payload)
             state.driverStats = payload;
         }
     }

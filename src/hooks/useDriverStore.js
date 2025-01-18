@@ -8,19 +8,18 @@ export const useDriverStore = () => {
 
 
     const setIsLoading = () => {
-        dispatch(setLoading())
+        dispatch( setLoading() );
     };
 
-    const setStartDriver = async(id, season) => {
+    const setStartDriver = async(id, season = 2024) => {
         const { data } = await f1Api.get(`drivers?id=${id}`);
-
-        dispatch(setDriver(data.response));
+        dispatch(setDriver(data.response[0]));
     };
 
-    const setStartStatsDriver = async(id, season) => {
+    const setStartStatsDriver = async(id, season = 2024) => {
         const { data } = await f1Api.get(`rankings/drivers?season=${season}&driver=${id}`);
 
-        dispatch(setStats(data.responses));
+        dispatch(setStats(data.response[0]));
     };
 
 

@@ -9,6 +9,6 @@ export const store = configureStore({
         races: racesSlice.reducer,
         rankings: rankingsSlice.reducer,
         seasons: seasonSlice.reducer,
-        driverSlice: driverSlice.reducer
+        driver: driverSlice.reducer
     }
 })
